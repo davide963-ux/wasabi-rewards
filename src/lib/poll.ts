@@ -175,7 +175,8 @@ export async function runPoll(args: {
     if (!prev || prev.current_tier === null) {
       // New entry into the tracking set: brand-new streak.
       streak_start_at = nowIso;
-      qualified_at = null;
+      // If duration is 0, qualify immediately on first sight
+      qualified_at = DURATION_MS === 0 ? nowIso : null;
       eventsNew++;
     } else {
       // Continuing streak. Keep the existing start.
