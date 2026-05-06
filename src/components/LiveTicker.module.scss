@@ -1,0 +1,102 @@
+@use '../styles/variables' as *;
+
+.ticker {
+  margin: 32px 0;
+  background: linear-gradient(90deg, $hot-deep 0%, $wasabi-bg-card 8%, $wasabi-bg-card 92%, $hot-deep 100%);
+  border-top: 2px solid $hot;
+  border-bottom: 2px solid $hot;
+  padding: 14px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: $hot;
+  color: $wasabi-bg;
+  padding: 4px 10px;
+  font-family: $font-display;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  .pulse {
+    width: 6px;
+    height: 6px;
+    background: $wasabi-bg;
+    border-radius: 50%;
+    animation: pulse-dot 1s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.3; transform: scale(0.8); }
+}
+
+.track {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  animation: marquee 60s linear infinite;
+  padding-left: 100px;
+  font-family: $font-mono;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+
+  &:hover { animation-play-state: paused; }
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: $ink;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &.PLATINUM { background: $tier-platinum; box-shadow: 0 0 8px $tier-platinum; }
+  &.GOLD     { background: $tier-gold;     box-shadow: 0 0 8px $tier-gold; }
+  &.SILVER   { background: $tier-silver;   box-shadow: 0 0 8px $tier-silver; }
+  &.BRONZE   { background: $tier-bronze;   box-shadow: 0 0 8px $tier-bronze; }
+  &.UPDATE   { background: $mint;          box-shadow: 0 0 8px $mint; }
+}
+
+.tier {
+  font-family: $font-display;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  &.PLATINUM { color: $tier-platinum; }
+  &.GOLD     { color: $tier-gold; }
+  &.SILVER   { color: $tier-silver; }
+  &.BRONZE   { color: $tier-bronze; }
+}
+
+.wallet {
+  font-family: $font-mono;
+  color: $mint-bright;
+}
+
+.dim { color: $ink-dim; }
+
+@media (max-width: 600px) {
+  .label { font-size: 10px; padding: 3px 8px; }
+  .track { padding-left: 80px; gap: 32px; font-size: 12px; }
+}

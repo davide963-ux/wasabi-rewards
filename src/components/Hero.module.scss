@@ -1,0 +1,194 @@
+@use '../styles/variables' as *;
+
+.hero {
+  position: relative;
+  padding: 80px 0 60px;
+  overflow: hidden;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  gap: 32px;
+  min-height: 480px;
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: rgba(168, 198, 79, 0.1);
+  border: 1px solid $wasabi-line-strong;
+  border-radius: 999px;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $mint-bright;
+  margin-bottom: 28px;
+
+  .pulse {
+    width: 8px;
+    height: 8px;
+    background: $hot;
+    border-radius: 50%;
+    animation: pulse-hot 2s ease-in-out infinite;
+  }
+}
+
+.headline {
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: clamp(56px, 9vw, 128px);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  color: $ink;
+  font-variation-settings: 'opsz' 96;
+
+  .line {
+    display: block;
+  }
+
+  .accent {
+    display: inline-block;
+    background: linear-gradient(180deg, $mint-bright 0%, $mint 50%, $mint-deep 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: wobble 3.5s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .hot {
+    color: $hot;
+    text-shadow: 0 0 32px rgba(230, 61, 138, 0.4);
+    display: inline-block;
+    animation: shake 4s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+}
+
+.lede {
+  font-size: 17px;
+  line-height: 1.6;
+  color: $ink-dim;
+  max-width: 44ch;
+  margin-top: 28px;
+
+  strong { color: $ink; font-weight: 600; }
+  em {
+    color: $mint-bright;
+    font-style: normal;
+    font-weight: 600;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+.cta {
+  font-family: $font-display;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  border-radius: 10px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid;
+  cursor: pointer;
+
+  &.primary {
+    background: $mint;
+    color: $wasabi-bg;
+    border-color: $mint;
+    &:hover {
+      background: $mint-bright;
+      border-color: $mint-bright;
+      transform: translateY(-2px) rotate(-1deg);
+      box-shadow: 0 12px 0 -4px rgba(168, 198, 79, 0.3);
+    }
+  }
+
+  &.secondary {
+    background: transparent;
+    color: $ink;
+    border-color: $wasabi-line-strong;
+    &:hover {
+      border-color: $hot;
+      color: $hot-bright;
+      transform: translateY(-2px) rotate(1deg);
+    }
+  }
+}
+
+// ---- mascot side ----
+.mascotWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+}
+
+.mascot {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  animation: bob 5s ease-in-out infinite;
+  z-index: 2;
+
+  img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6));
+  }
+}
+
+.mascotGlow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(ellipse at center, $mint-glow 0%, transparent 60%);
+  z-index: 1;
+  animation: pulse-mint 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+// Floating decorations around mascot
+.spice {
+  position: absolute;
+  font-size: 36px;
+  z-index: 3;
+  animation: bob 3.5s ease-in-out infinite;
+
+  &:nth-child(2) { top: 8%; left: 10%; animation-delay: 0.3s; }
+  &:nth-child(3) { top: 30%; right: 8%; animation-delay: 0.8s; }
+  &:nth-child(4) { bottom: 18%; left: 4%; animation-delay: 1.2s; font-size: 28px; }
+  &:nth-child(5) { bottom: 8%; right: 14%; animation-delay: 1.6s; font-size: 32px; }
+}
+
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    min-height: auto;
+  }
+  .mascotWrap { min-height: 300px; order: -1; }
+  .mascot { max-width: 280px; }
+  .hero { padding: 48px 0 32px; }
+}

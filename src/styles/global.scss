@@ -1,0 +1,145 @@
+@use 'variables' as *;
+
+// ============================================================================
+// Reset + base
+// ============================================================================
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: $wasabi-bg;
+  color: $ink;
+  font-family: $font-body;
+  font-feature-settings: 'kern', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, select, textarea { font: inherit; color: inherit; }
+img { display: block; max-width: 100%; }
+
+::selection { background: $hot; color: $wasabi-bg; }
+
+// ============================================================================
+// Page background — drifting cheese & spice particles
+// ============================================================================
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.55;
+}
+
+.bg-particle {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0;
+  filter: blur(0.5px);
+  will-change: transform, opacity;
+  animation: particle-drift 18s linear infinite;
+}
+
+@keyframes particle-drift {
+  0%   { transform: translate(0, 0) rotate(0deg);   opacity: 0; }
+  10%  { opacity: 0.4; }
+  90%  { opacity: 0.4; }
+  100% { transform: translate(120px, -200vh) rotate(720deg); opacity: 0; }
+}
+
+// Subtle ambient gradient wash
+.bg-wash {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% -10%, rgba(168, 198, 79, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 110%, rgba(230, 61, 138, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 50%, rgba(168, 198, 79, 0.02) 0%, transparent 80%);
+}
+
+// ============================================================================
+// Page content layer
+// ============================================================================
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 760px) {
+  .page { padding: 0 16px; }
+}
+
+// ============================================================================
+// Shared animations
+// ============================================================================
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  10%      { transform: translate(-1px, 1px) rotate(-0.5deg); }
+  20%      { transform: translate(1px, -1px) rotate(0.5deg); }
+  30%      { transform: translate(-1px, -1px) rotate(-0.5deg); }
+  40%      { transform: translate(1px, 1px) rotate(0.5deg); }
+  50%      { transform: translate(-1px, 1px) rotate(0); }
+}
+
+@keyframes pulse-hot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(230, 61, 138, 0.6); }
+  50%      { box-shadow: 0 0 0 12px rgba(230, 61, 138, 0); }
+}
+
+@keyframes pulse-mint {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168, 198, 79, 0.6); }
+  50%      { box-shadow: 0 0 0 12px rgba(168, 198, 79, 0); }
+}
+
+@keyframes flame-flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  25%      { transform: scaleY(1.1) scaleX(0.95); }
+  75%      { transform: scaleY(0.95) scaleX(1.05); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  20%      { transform: rotate(-2deg) scale(1.02); }
+  60%      { transform: rotate(2deg) scale(1.02); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch-flash {
+  0%, 100% { opacity: 1; }
+  47%, 49% { opacity: 0.85; transform: translateX(-1px); }
+  48%      { opacity: 0.95; transform: translateX(1px); }
+}
+
+// Reduce motion accessibility
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

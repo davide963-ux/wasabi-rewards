@@ -1,0 +1,156 @@
+@use '../styles/variables' as *;
+
+.section {
+  margin: 56px 0;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 28px;
+  border-bottom: 1px solid $wasabi-line;
+  padding-bottom: 16px;
+}
+
+.title {
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: 44px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+
+  .accent {
+    color: $mint;
+    font-style: italic;
+  }
+}
+
+.meta {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $ink-dim;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: right;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: $wasabi-bg-card;
+  border: 1px solid $wasabi-line;
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: default;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    transition: height 0.3s ease;
+  }
+
+  &.PLATINUM::before { background: $tier-platinum; }
+  &.GOLD::before     { background: $tier-gold; }
+  &.SILVER::before   { background: $tier-silver; }
+  &.BRONZE::before   { background: $tier-bronze; }
+
+  &:hover {
+    transform: translateY(-6px) rotate(-0.8deg);
+    border-color: $wasabi-line-strong;
+
+    &::before { height: 8px; }
+
+    &.PLATINUM { box-shadow: 0 16px 32px -16px $tier-platinum; }
+    &.GOLD     { box-shadow: 0 16px 32px -16px $tier-gold; }
+    &.SILVER   { box-shadow: 0 16px 32px -16px $tier-silver; }
+    &.BRONZE   { box-shadow: 0 16px 32px -16px $tier-bronze; }
+
+    .flames { transform: scale(1.15) rotate(5deg); }
+  }
+}
+
+.flames {
+  font-size: 22px;
+  margin-bottom: 14px;
+  letter-spacing: 4px;
+  filter: drop-shadow(0 0 8px rgba(255, 140, 42, 0.4));
+  transition: transform 0.3s ease;
+  animation: flame-flicker 0.8s ease-in-out infinite;
+}
+
+.tierName {
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+
+  .PLATINUM & { color: $tier-platinum; }
+  .GOLD &     { color: $tier-gold; }
+  .SILVER &   { color: $tier-silver; }
+  .BRONZE &   { color: $tier-bronze; }
+}
+
+.heat {
+  font-family: $font-mono;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $ink-faint;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.count {
+  font-family: $font-display;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: $ink;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 6px;
+}
+
+.countLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: $ink-dim;
+  margin-bottom: 14px;
+}
+
+.range {
+  font-family: $font-mono;
+  font-size: 12px;
+  color: $ink-dim;
+  font-weight: 600;
+  padding-top: 12px;
+  border-top: 1px dashed $wasabi-line;
+}
+
+.range strong { color: $ink; font-weight: 700; }
+
+@media (max-width: 800px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .title { font-size: 32px; }
+  .count { font-size: 48px; }
+}
+
+@media (max-width: 460px) {
+  .head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .meta { text-align: left; }
+}

@@ -1,0 +1,212 @@
+@use '../styles/variables' as *;
+
+.section {
+  margin: 56px 0;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 28px;
+  border-bottom: 1px solid $wasabi-line;
+  padding-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: 44px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+
+  .accent {
+    color: $hot;
+    font-style: italic;
+  }
+}
+
+.meta {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $ink-dim;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.list { display: flex; flex-direction: column; gap: 24px; }
+
+.tier {
+  background: $wasabi-bg-card;
+  border: 1px solid $wasabi-line;
+  border-radius: 20px;
+  padding: 28px 28px 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+  }
+
+  &.PLATINUM::before { background: $tier-platinum; }
+  &.GOLD::before     { background: $tier-gold; }
+  &.SILVER::before   { background: $tier-silver; }
+  &.BRONZE::before   { background: $tier-bronze; }
+}
+
+.tierHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed $wasabi-line;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tierLabel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+
+  .PLATINUM & { color: $tier-platinum; }
+  .GOLD &     { color: $tier-gold; }
+  .SILVER &   { color: $tier-silver; }
+  .BRONZE &   { color: $tier-bronze; }
+}
+
+.tierFlames {
+  font-size: 18px;
+  letter-spacing: 2px;
+  animation: flame-flicker 0.8s ease-in-out infinite;
+}
+
+.tierMeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $ink-dim;
+
+  .count {
+    color: $ink;
+    font-weight: 700;
+    background: rgba(168, 198, 79, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+}
+
+.rows { list-style: none; }
+
+.row {
+  display: grid;
+  grid-template-columns: 32px 1fr 90px 90px 110px;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed $wasabi-line;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.2s ease;
+
+  &:last-child { border-bottom: none; }
+
+  &:hover {
+    transform: translateX(4px);
+    background: rgba(168, 198, 79, 0.04);
+  }
+}
+
+.rank {
+  font-family: $font-display;
+  font-weight: 800;
+  font-size: 14px;
+  color: $ink-faint;
+  letter-spacing: -0.02em;
+}
+
+.row:nth-child(1) .rank { color: $tier-gold; font-size: 18px; }
+.row:nth-child(2) .rank { color: $tier-silver; font-size: 16px; }
+.row:nth-child(3) .rank { color: $tier-bronze; font-size: 15px; }
+
+.wallet {
+  font-family: $font-mono;
+  font-size: 13px;
+  color: $ink;
+  font-weight: 500;
+}
+
+.pct {
+  font-family: $font-display;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: right;
+  color: $mint-bright;
+}
+
+.streak {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $ink-dim;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  .heat {
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 14px;
+  }
+}
+
+.balance {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $ink-faint;
+  text-align: right;
+}
+
+.empty {
+  font-family: $font-display;
+  font-style: italic;
+  color: $ink-dim;
+  padding: 24px 0 12px;
+  font-size: 16px;
+  text-align: center;
+
+  &::before { content: '🦗 '; }
+}
+
+@media (max-width: 760px) {
+  .tier { padding: 22px 18px 14px; }
+  .tierLabel { font-size: 22px; }
+  .row {
+    grid-template-columns: 24px 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 4px 10px;
+  }
+  .rank { grid-row: 1 / 3; }
+  .streak, .balance {
+    grid-column: 2 / 4;
+    text-align: left;
+    font-size: 10px;
+  }
+  .pct { text-align: right; font-size: 16px; }
+  .title { font-size: 32px; }
+}

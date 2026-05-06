@@ -1,0 +1,73 @@
+// ============================================================================
+// Wasabi · HODL Rewards — Brand System
+// ============================================================================
+
+// ---- Color palette ----
+// Pulled from the mascot artwork. Mint = body, pink = tongue, dark green = outline.
+$wasabi-bg:        #050807;   // near-black with a green undertone
+$wasabi-bg-soft:   #0a1009;
+$wasabi-bg-card:   #0e1810;
+$wasabi-bg-elev:   #14201a;
+$wasabi-line:      rgba(168, 198, 79, 0.18);
+$wasabi-line-strong: rgba(168, 198, 79, 0.4);
+
+$mint:        #a8c64f;   // primary mint (mascot body bright)
+$mint-bright: #bef264;   // hover/active highlight
+$mint-deep:   #6b8a2e;   // outline / mascot darker
+$mint-glow:   rgba(168, 198, 79, 0.4);
+
+$hot:         #e63d8a;   // pink tongue — the "spice" color
+$hot-bright:  #ff5da0;
+$hot-deep:    #b22165;
+$hot-glow:    rgba(230, 61, 138, 0.4);
+
+$nuclear:     #ff3030;   // for "NUCLEAR" tier / faces melted vibes
+$fire-orange: #ff8c2a;
+$fire-yellow: #ffd23f;
+
+$ink:         #f1f4ec;   // primary text — soft warm white
+$ink-dim:     #95a78a;   // secondary text
+$ink-faint:   #5a6b50;   // tertiary
+
+// ---- Tier colors ----
+// Each tier gets its own personality but stays in the same family
+$tier-platinum: #c8d5e8;
+$tier-gold:     #f5c451;
+$tier-silver:   #d4d4cf;
+$tier-bronze:   #e08b5b;
+
+// ---- Type ----
+$font-display: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif;
+$font-body:    'Inter', system-ui, sans-serif;
+$font-mono:    'JetBrains Mono', ui-monospace, monospace;
+$font-special: 'Caveat', 'Comic Sans MS', cursive;  // for handwritten accents
+
+// ---- Mixins ----
+@mixin caps {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+@mixin micro-caps {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+@mixin glow($color) {
+  box-shadow: 0 0 0 1px $color, 0 0 24px -4px $color;
+}
+
+@mixin tilt-hover {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  &:hover {
+    transform: translateY(-4px) rotate(-0.5deg);
+  }
+}
+
+@mixin sticker {
+  // Drop-shadow that mimics the "sticker" effect of the mascots
+  filter: drop-shadow(0 0 0 #000) drop-shadow(2px 2px 0 #000);
+}

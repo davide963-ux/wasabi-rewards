@@ -1,0 +1,273 @@
+@use '../styles/variables' as *;
+
+// ============== winners ==============
+.winnersSection { margin: 56px 0; }
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid $wasabi-line;
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+}
+
+.title {
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: 44px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+
+  .accent { color: $fire-orange; font-style: italic; }
+}
+
+.counter {
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: 32px;
+  color: $hot;
+  letter-spacing: -0.02em;
+}
+
+.winnerCard {
+  background: linear-gradient(135deg, $wasabi-bg-card 0%, $wasabi-bg-elev 100%);
+  border: 1px solid $wasabi-line;
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 22px;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateX(6px);
+    border-color: $fire-orange;
+  }
+
+  &::before {
+    content: '🏆';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    opacity: 0.6;
+  }
+}
+
+.winnerTier {
+  font-family: $font-display;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 2px solid;
+
+  &.PLATINUM { color: $tier-platinum; border-color: $tier-platinum; }
+  &.GOLD     { color: $tier-gold;     border-color: $tier-gold; }
+  &.SILVER   { color: $tier-silver;   border-color: $tier-silver; }
+  &.BRONZE   { color: $tier-bronze;   border-color: $tier-bronze; }
+}
+
+.winnerWallet {
+  font-family: $font-mono;
+  font-size: 14px;
+  font-weight: 600;
+  color: $ink;
+  word-break: break-all;
+}
+
+.winnerGoal {
+  font-family: $font-display;
+  font-style: italic;
+  font-size: 14px;
+  color: $ink-dim;
+  margin-top: 4px;
+}
+
+.winnerMeta {
+  font-family: $font-mono;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $ink-dim;
+  text-align: right;
+  line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+  .title { font-size: 32px; }
+  .winnerCard { grid-template-columns: 1fr; gap: 8px; }
+  .winnerMeta { text-align: left; }
+}
+
+// ============== community / footer ==============
+.community {
+  margin: 80px 0 40px;
+  padding: 56px 32px;
+  background:
+    linear-gradient(135deg, rgba(168, 198, 79, 0.05), rgba(230, 61, 138, 0.05));
+  border: 1px solid $wasabi-line-strong;
+  border-radius: 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.communityTitle {
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: 56px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  margin-bottom: 12px;
+
+  .accent { color: $hot; }
+}
+
+.communitySub {
+  font-family: $font-mono;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $mint;
+  margin-bottom: 36px;
+}
+
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.socialBlock {
+  background: $wasabi-bg-card;
+  border: 1px solid $wasabi-line;
+  border-radius: 14px;
+  padding: 22px 18px;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-6px) rotate(-1deg);
+    border-color: $mint;
+    background: rgba(168, 198, 79, 0.08);
+
+    .arrow { transform: translateX(8px); }
+  }
+
+  .platform {
+    font-family: $font-display;
+    font-weight: 900;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: $ink;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  .desc {
+    font-family: $font-mono;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $ink-dim;
+    margin-bottom: 14px;
+  }
+
+  .arrow {
+    display: inline-block;
+    color: $mint-bright;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+  }
+}
+
+.contractBox {
+  margin-top: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: $wasabi-bg;
+  border: 1px solid $wasabi-line;
+  border-radius: 999px;
+  font-family: $font-mono;
+  font-size: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .label {
+    color: $ink-faint;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .ca {
+    color: $mint-bright;
+    word-break: break-all;
+  }
+
+  .copy {
+    background: $mint;
+    color: $wasabi-bg;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+    font-family: inherit;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    &:hover { background: $mint-bright; }
+    &.copied { background: $hot; color: $ink; }
+  }
+}
+
+.smokingMascot {
+  position: absolute;
+  bottom: -20px;
+  left: -40px;
+  width: 160px;
+  opacity: 0.4;
+  pointer-events: none;
+  animation: bob 6s ease-in-out infinite;
+
+  img {
+    width: 100%;
+    transform: rotate(-12deg);
+  }
+}
+
+.disclaimer {
+  margin-top: 48px;
+  text-align: center;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: $ink-faint;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .community { padding: 36px 20px; }
+  .communityTitle { font-size: 32px; }
+  .socialGrid { grid-template-columns: 1fr; }
+  .smokingMascot { width: 100px; opacity: 0.25; }
+}
