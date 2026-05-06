@@ -28,7 +28,7 @@ export const TIER_ORDER: Tier[] = ['PLATINUM', 'GOLD', 'SILVER', 'BRONZE'];
 export const MIN_TIER_BPS = TIER_THRESHOLDS_BPS.BRONZE; // 35 bps = 0.35%
 
 /** Duration a wallet must remain continuously ≥ MIN_TIER_BPS to qualify. */
-export const DURATION_DAYS = 7;
+export const DURATION_DAYS = 0;
 export const DURATION_MS = DURATION_DAYS * 24 * 60 * 60 * 1000;
 
 /**
