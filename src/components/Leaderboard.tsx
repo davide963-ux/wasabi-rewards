@@ -75,7 +75,7 @@ export function Leaderboard({ tiers, decimals }: Props) {
                   {holders.map((h, i) => (
                     <li key={h.wallet} className={styles.row}>
                       <span className={styles.rank}>{(i + 1).toString().padStart(2, '0')}</span>
-                      href={`https://solscan.io/account/${h.wallet}`}
+                     <a href={`https://solscan.io/account/${h.wallet}`}
                         target="_blank"
                         rel="noreferrer"
                         className={styles.wallet}
