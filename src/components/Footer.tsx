@@ -62,7 +62,14 @@ export function Winners({ winners }: { winners: Winner[] }) {
         <div key={`${w.goalId}-${w.tier}`} className={styles.winnerCard}>
           <span className={`${styles.winnerTier} ${styles[w.tier]}`}>{TIER_LABEL[w.tier]}</span>
           <div>
-            <div className={styles.winnerWallet}>{shorten(w.wallet)}</div>
+            href={`https://solscan.io/account/${w.wallet}`}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.winnerWallet}
+              title={w.wallet}
+            >
+              {shorten(w.wallet)} ↗
+            </a>
             <div className={styles.winnerGoal}>
               {w.goalLabel ?? `${formatUsd(w.goalTargetUsd)} milestone`}
             </div>
