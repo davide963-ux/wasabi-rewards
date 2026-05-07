@@ -17,10 +17,10 @@ interface Props {
 }
 
 const TIER_DATA: Record<Tier, { name: string; flames: string }> = {
-  PLATINUM: { name: 'Platinum', flames: '🔥🔥🔥🔥' },
-  GOLD:     { name: 'Gold',     flames: '🔥🔥🔥' },
-  SILVER:   { name: 'Silver',   flames: '🔥🔥' },
-  BRONZE:   { name: 'Bronze',   flames: '🔥' },
+  PLATINUM: { name: 'Platinum', flames: '🔥🔥' },
+  GOLD:     { name: 'Gold',     flames: '🔥' },
+  SILVER:   { name: 'Silver',   flames: '' },
+  BRONZE:   { name: 'Bronze',   flames: '' },
 };
 
 function shorten(addr: string): string {
