@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { BackgroundFX } from '@/components/BackgroundFX';
 import '@/styles/global.scss';
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <BackgroundFX />
         {children}
+        <Analytics />
       </body>
     </html>
   );
