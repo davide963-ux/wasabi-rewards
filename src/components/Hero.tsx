@@ -49,10 +49,7 @@ export function Hero() {
           <div className={styles.mascot}>
             <img src="/mascot/sunglasses.png" alt="Wasabi mascot wearing sunglasses" />
           </div>
-          <span className={styles.spice}>🔥</span>
-          <span className={styles.spice}>🌶️</span>
-          <span className={styles.spice}>🧀</span>
-          <span className={styles.spice}>💸</span>
+          
         </div>
       </div>
     </section>
