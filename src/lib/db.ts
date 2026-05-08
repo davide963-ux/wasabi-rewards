@@ -287,7 +287,7 @@ export async function getLatestPollRun(): Promise<{
   const rows = (await sql`
     SELECT finished_at, duration_ms, wallets_tracked, total_supply, decimals, ok
     FROM poll_runs
-    WHERE ok = TRUE
+    WHERE ok::text = 'true'
     ORDER BY finished_at DESC
     LIMIT 1
   `) as {
