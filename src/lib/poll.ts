@@ -175,11 +175,16 @@ export async function runPoll(args: {
     if (!prev || prev.current_tier === null) {
       // New entry into the tracking set: brand-new streak.
       streak_start_at = nowIso;
-      // If duration is 0, qualify immediately on first sight
       qualified_at = DURATION_MS === 0 ? nowIso : null;
       eventsNew++;
+    } else if (prev.current_tier !== tier) {
+      // Wallet moved between tier ranges — reset the streak so its
+      // classification matches its CURRENT range, not a stale one.
+      streak_start_at = nowIso;
+      qualified_at = DURATION_MS === 0 ? nowIso : null;
+      eventsUpdated++;
     } else {
-      // Continuing streak. Keep the existing start.
+      // Same tier as before — continuing streak.
       streak_start_at = prev.streak_start_at ?? nowIso;
       const elapsed = start - new Date(streak_start_at).getTime();
       qualified_at = elapsed >= DURATION_MS
