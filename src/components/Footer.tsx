@@ -102,7 +102,7 @@ export function Community() {
       <h2 className={styles.communityTitle}>
         Stay <span className={styles.accent}>spicy</span>.
       </h2>
-      <p className={styles.communitySub}>The most dangerous community on Solana</p>
+      <p className={styles.communitySub}>The most dangerous community on Soolana</p>
 
       <div className={styles.socialGrid}>
         <a
