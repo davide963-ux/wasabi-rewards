@@ -4,10 +4,10 @@ import styles from './TierCards.module.scss';
 import { TIER_ORDER, type Tier } from '@/lib/tiers';
 
 const TIER_DATA: Record<Tier, { name: string; flames: string; heat: string; range: string }> = {
-  PLATINUM: { name: 'Platinum', flames: '🔥🔥🔥🔥', heat: 'Nuclear',  range: '≥ 1.00%' },
-  GOLD:     { name: 'Gold',     flames: '🔥🔥🔥',   heat: 'Spicy',    range: '0.70 – 0.99%' },
-  SILVER:   { name: 'Silver',   flames: '🔥🔥',     heat: 'Medium',   range: '0.50 – 0.69%' },
-  BRONZE:   { name: 'Bronze',   flames: '🔥',       heat: 'Mild',     range: '0.35 – 0.49%' },
+  PLATINUM: { name: 'Platinum Chef', flames: '🔥🔥🔥🔥', heat: 'Nuclear',  range: '≥ 1.00%' },
+  GOLD:     { name: 'Gold Chef',     flames: '🔥🔥🔥',   heat: 'Spicy',    range: '0.70 – 0.99%' },
+  SILVER:   { name: 'Silver Chef',   flames: '🔥🔥',     heat: 'Medium',   range: '0.50 – 0.69%' },
+  BRONZE:   { name: 'Bronze Chef',   flames: '🔥',       heat: 'Mild',     range: '0.35 – 0.49%' },
 };
 
 interface Props {
