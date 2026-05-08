@@ -242,17 +242,18 @@
 
 .smokingMascot {
   position: absolute;
-  bottom: -20px;
-  left: -40px;
-  width: 160px;
-  opacity: 0.4;
+  bottom: 16px;
+  right: 24px;
+  width: 110px;
+  opacity: 0.5;
   pointer-events: none;
   animation: bob 6s ease-in-out infinite;
 
   img {
     width: 100%;
-    transform: rotate(-12deg);
+    transform: rotate(-8deg);
   }
+
 }
 
 .disclaimer {
