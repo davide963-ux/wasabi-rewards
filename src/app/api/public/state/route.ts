@@ -1,14 +1,8 @@
 /**
  * GET /api/public/state
  *
- * One-shot endpoint that returns everything the public page renders:
- *   - latest poll run metadata
- *   - per-tier counts (qualified + total in range)
- *   - top N wallets per tier (qualified only)
- *   - current goal
- *   - past winners
- *
- * No auth required.
+ * One-shot endpoint that returns everything the public page renders.
+ * Explicitly disables all caching (route + CDN) so we always read fresh DB.
  */
 
 import { NextResponse } from 'next/server';
@@ -22,6 +16,8 @@ import { TIER_ORDER, formatPct, type Tier } from '@/lib/tiers';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
 const LEADERBOARD_LIMIT = 25;
 
@@ -40,23 +36,20 @@ export async function GET() {
       })
     );
 
-    const tiers: Record<
-      Tier,
-      {
-        qualifiedCount: number;
-        leaderboard: Array<{
-          wallet: string;
-          balance: string;
-          pctBps: number;
-          pct: string;
-          streakDays: number;
-        }>;
-      }
-    > = {
+    const tiers: Record<Tier, {
+      qualifiedCount: number;
+      leaderboard: Array<{
+        wallet: string;
+        balance: string;
+        pctBps: number;
+        pct: string;
+        streakDays: number;
+      }>;
+    }> = {
       PLATINUM: { qualifiedCount: 0, leaderboard: [] },
-      GOLD: { qualifiedCount: 0, leaderboard: [] },
-      SILVER: { qualifiedCount: 0, leaderboard: [] },
-      BRONZE: { qualifiedCount: 0, leaderboard: [] },
+      GOLD:     { qualifiedCount: 0, leaderboard: [] },
+      SILVER:   { qualifiedCount: 0, leaderboard: [] },
+      BRONZE:   { qualifiedCount: 0, leaderboard: [] },
     };
 
     const now = Date.now();
@@ -73,7 +66,7 @@ export async function GET() {
       }));
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       latestPoll: latestRun
         ? {
             finishedAt: latestRun.finished_at,
@@ -102,10 +95,16 @@ export async function GET() {
         pickedAt: w.picked_at,
       })),
     });
+
+    // Force fresh response on every request — no CDN caching
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    response.headers.set('CDN-Cache-Control', 'no-store');
+    response.headers.set('Vercel-CDN-Cache-Control', 'no-store');
+    return response;
   } catch (err) {
     console.error('[public/state] error:', err);
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : String(err) },
+      { error: 'internal server error' },
       { status: 500 }
     );
   }
