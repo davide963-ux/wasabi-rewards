@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { BackgroundFX } from '@/components/BackgroundFX';
 import '@/styles/global.scss';
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <BackgroundFX />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
