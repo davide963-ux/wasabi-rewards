@@ -287,7 +287,7 @@ export async function getLatestPollRun(): Promise<{
   const rows = (await sql`
     SELECT finished_at, duration_ms, wallets_tracked, total_supply, decimals, ok
     FROM poll_runs
-    WHERE ok::text = 'true'
+    WHERE ok::text IN ('true', 't')
     ORDER BY finished_at DESC
     LIMIT 1
   `) as {
@@ -324,7 +324,7 @@ export async function listGoals(): Promise<GoalRow[]> {
 export async function getCurrentGoal(): Promise<GoalRow | null> {
   await ensureSchema();
   const sql = getSql();
-  const rows = (await sql`SELECT * FROM goals WHERE is_current = TRUE LIMIT 1`) as GoalRow[];
+  const rows = (await sql`SELECT * FROM goals WHERE is_current::text IN ('true', 't') LIMIT 1`) as GoalRow[];
   return rows[0] ?? null;
 }
 
